@@ -9,10 +9,23 @@ class PessoaServices extends Services{
     super('Pessoa') // Envio A model Utilizada nos serviços
   }
 
-  async pegaMatriculasPorEstudante(id){
+  //Metodos Proprios
+
+  async pegaMatriculasAtivasPorEstudante(id){
     const estudante = await super.pegaUmRegistroPorId(id)
     const listaMatricula = await estudante.getAulasMatriculadas()
     return listaMatricula
+  }
+
+  async pegaTodasAsMatriculasPorEstudante(id){
+    const estudante = await super.pegaUmRegistroPorId(id)
+    const listaMatricula = await estudante.getTodasAsMatriculas()
+    return listaMatricula
+  }
+
+  async pegaPessoasEscopoTodos(){
+    const listaPessoas = await super.pegaRegistroPorEscopo('todosOsRegistros')
+    return listaPessoas
   }
 }
 
