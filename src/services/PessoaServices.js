@@ -1,12 +1,13 @@
 // PessoaService herda a classe Services.
 // Super passa a string Pessao, para que a classe Service utilize a Tabela Pessoa
 // Utilizado junto ao PessoasController.js
-
+const dataSource = require('../database/models')
 const Services = require('./Services.js')
 
 class PessoaServices extends Services{
   constructor(){
     super('Pessoa') // Envio A model Utilizada nos serviços
+    this.matriculaServices = new Services('Matricula')
   }
 
   //Metodos Proprios
@@ -26,6 +27,13 @@ class PessoaServices extends Services{
   async pegaPessoasEscopoTodos(){
     const listaPessoas = await super.pegaRegistroPorEscopo('todosOsRegistros')
     return listaPessoas
+  }
+
+  async cancelaPessoaEMatriculas(estudanteId){
+    return dataSource.sequelize.transaction(async () => {
+      await super.atualizaRegistro({ativo: false}, {id: estudanteId})
+      await this.matriculaServices.atualizaRegistro({status: 'cancelado'}, {estudante_id: estudanteId}) 
+    })
   }
 }
 

@@ -1,6 +1,5 @@
 // Quando existem muitos Models, é adequado usar um metodo generico.
 //Services automatiza a chamada de metodos aos models
-
 const dataSource = require('../database/models')
 
 class Services{
@@ -42,6 +41,10 @@ class Services{
   
   async excluirRegistro(id){
     return dataSource[this.model].destroy({ where: { id: id } })
+  }
+
+  async pegaEContaRegistros(options){
+    return dataSource[this.model].findAndCountAll({ ...options })
   }
 }
 

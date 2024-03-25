@@ -4,10 +4,10 @@ const router = Router()
 
 const cursoController = new CursoController()
 
-router.get('/curso', (req,res) => cursoController.pegaCursos(req,res))
-router.get('/curso/:id', (req,res) => cursoController.pegarUmPorId(req,res))
-router.post('/curso/', (req,res) => cursoController.criarNovo(req,res))
-router.put('/curso/:id', (req,res) => cursoController.atualiza(req,res))
-router.delete('/curso/:id', (req,res) => cursoController.exclui(req,res))
+router.get('/cursos', (req,res) => cursoController.pegaCursos(req,res))
+router.get('/cursos/:id', (req,res) => cursoController.pegarUmPorId(req,res))
+router.post('/cursos/', (req,res) => cursoController.criarNovo(req,res))
+router.put('/cursos/:id', (req,res) => cursoController.atualiza(req,res))
+router.delete('/cursos/:id', (req,res) => cursoController.exclui(req,res))
 
 module.exports = router
